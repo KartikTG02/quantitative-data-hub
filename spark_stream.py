@@ -86,7 +86,13 @@ def write_to_postgres(df, epoch_id):
     foreachBatch allows us to take the finalized 1-minute DataFrame chunk 
     and write it to Postgres like a standard batch job.
     """
+    if df.isEmpty():
+        print(f"Batch {epoch_id} triggered, but it is empty. Waiting for data...")
 
+    print(f"--- Finalized 1 min window ---")
+    df.show()
+    
+    print("Writing to postgreSQL and ensuring table exists...")
     df.write \
         .format("jdbc") \
         .option("url", "jdbc:postgresql://localhost:5432/market_data") \

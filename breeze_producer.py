@@ -6,7 +6,6 @@ from confluent_kafka import Producer
 from breeze_connect import BreezeConnect
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
-import urllib
 
 engine = create_engine("postgresql://admin:password123@localhost:5432/market_data")
 
@@ -21,15 +20,15 @@ producer = Producer(conf)
 KAFKA_TOPIC = "nse_live_ticks"
 
 
-API_KEY = os.getenv("API_KEY")
-API_SECRET = os.getenv("SECRET_KEY")
-SESSION_TOKEN = os.getenv("SESSION_TOKEN")
+API_KEY = os.environ.get("ICICI_APP_KEY")
+API_SECRET = os.environ.get("ICICI_SECRET_KEY")
+SESSION_TOKEN = os.environ.get("ICICI_SESSION_KEY")
 
 print("Authenticating with Breeze Connect API...")
 breeze = BreezeConnect(api_key=API_KEY)
 breeze.generate_session(api_secret=API_SECRET, session_token=SESSION_TOKEN)
 
-print("Fethching Nifty 50 tokens from DB...")
+print("Fetching Nifty 50 tokens from DB...")
 metadata_df = pd.read_sql("SELECT ticker, icici_token FROM dim_stock_metadata", engine)
 
 token_map = {}
