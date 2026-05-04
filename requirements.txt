@@ -18,8 +18,8 @@ beautifulsoup4==4.14.3
 bidict==0.23.1
 bleach==6.3.0
 blinker==1.9.0
-boto3==1.43.2
-botocore==1.43.0
+boto3
+botocore
 breeze_connect==1.0.69
 cachetools==7.1.0
 certifi==2026.4.22
