@@ -29,7 +29,17 @@ kafka_schema = StructType([
     StructField("timestamp", TimestampType(), True)
 ])
 
-metadata_df = spark.read.csv("company_metadata.csv", header=True)
+# metadata_df = spark.read.csv("company_metadata.csv", header=True)
+
+metadata_df = spark.read \
+    .format("jdbc") \
+    .option("url", "jdbc:postgresql://localhost:5432/market_data") \
+    .option("dbtable", "dim_stock_metadata") \
+    .option("user", "admin") \
+    .option("password", "password123") \
+    .option("driver", "org.postgresql.Driver") \
+    .load()
+
 raw_stream = spark.readStream \
     .format("kafka") \
     .option("kafka.bootstrap.servers", "localhost:9092") \
@@ -60,6 +70,7 @@ final_df = enriched_stream.select(
     col("window.start").alias("window_start"),
     col("window.end").alias("window_end"),
     col("ticker"),
+    col("company_name"),
     col("sector"),
     col("open_price"),
     col("high_price"),
