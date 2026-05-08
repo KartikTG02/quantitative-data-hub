@@ -28,7 +28,7 @@ breeze.generate_session(api_secret=SECRET_KEY, session_token=SESSION_TOKEN)
 # --- 2. Fetch Tickers from Database ---
 print("Fetching Nifty 50 list from the Database...")
 # Limiting to 5 for testing so you don't hit REST API rate limits instantly
-meta_df = pd.read_sql("SELECT ticker FROM dim_stock_metadata", engine)
+meta_df = pd.read_sql("SELECT ticker FROM dim_stock_metadata limit 5;", engine)
 tickers_to_track = meta_df['ticker'].tolist()
 
 to_date = datetime.now().strftime('%Y-%m-%dT15:30:00.000Z')
