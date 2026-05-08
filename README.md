@@ -17,7 +17,7 @@ This project implements a decoupled, event-driven streaming architecture:
 ## 📂 Project Structure
 
 ```text
-quant_terminal/
+quantitative_data_hub/
 ├── config/                  # YAML/JSON configs for DB, Kafka, and API keys
 ├── __init__.py
 ├── ingestion/           # ICICI Breeze API websocket & Kafka Producer
