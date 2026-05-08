@@ -59,7 +59,7 @@ def get_gold_data(ticker):
         return pd.DataFrame()
 
 ticker_df = get_gold_data(selected_ticker)
-
+ticker_df['window_start'] = pd.to_datetime(ticker_df['window_start']).dt.tz_localize('UTC').dt.tz_convert('Asia/Kolkata')
 # -- 4. Render the Dashboard --
 if not ticker_df.empty:
     # Top Row Metrics
@@ -110,7 +110,7 @@ if not ticker_df.empty:
 
     st.plotly_chart(fig, use_container_width=True)
 
-    st.subheader("Gold Layer (PostgreSQL)")
+    st.subheader("Gold Layer")
     st.dataframe(
         ticker_df.sort_values(by='window_start', ascending=False),
         use_container_width=True,
