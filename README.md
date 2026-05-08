@@ -20,10 +20,10 @@ This project implements a decoupled, event-driven streaming architecture:
 quantitative_data_hub/
 ├── config/                  # YAML/JSON configs for DB, Kafka, and API keys
 ├── __init__.py
-├── ingestion/           # ICICI Breeze API websocket & Kafka Producer
-├── processing/          # PySpark structured streaming jobs
-├── storage/             # Postgres and MinIO connection handlers
-└── dashboard/           # Streamlit application UI
+├── ingestion/               # ICICI Breeze API websocket & Kafka Producer
+├── processing/              # PySpark structured streaming jobs
+├── storage/                 # Postgres and MinIO connection handlers
+└── dashboard/               # Streamlit application UI
 ├── .env.example             # Template for environment variables
 ├── requirements.txt         # Python dependencies
 ├── docker-compose.yml       # Infrastructure orchestration (Kafka, Postgres, MinIO)
